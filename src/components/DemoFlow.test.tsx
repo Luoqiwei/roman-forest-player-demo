@@ -41,12 +41,12 @@ describe('播放器 Demo 闭环', () => {
     const tree = await screen.findByRole('img', { name: '专辑上的糖果初芽' });
     expect(screen.getByRole('region', { name: '音乐树成长进度' })).toHaveTextContent('距离下一阶段还需');
     const treeImage = tree.querySelector('img');
-    expect(treeImage).toHaveAttribute('src', '/assets/trees/candy-clay/stage-1.webp');
+    expect(treeImage?.getAttribute('src')).toMatch(/\/assets\/trees\/candy-clay\/stage-1\.webp$/);
     expect(treeImage?.className).toContain('smoothTreePlaying');
     expect(screen.getByRole('button', { name: '暂停' })).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: '暂停' }));
-    expect(treeImage).toHaveAttribute('src', '/assets/trees/candy-clay/stage-1.webp');
+    expect(treeImage?.getAttribute('src')).toMatch(/\/assets\/trees\/candy-clay\/stage-1\.webp$/);
     expect(treeImage?.className).not.toContain('smoothTreePlaying');
     fireEvent.click(screen.getByRole('button', { name: '播放' }));
     expect(treeImage?.className).toContain('smoothTreePlaying');

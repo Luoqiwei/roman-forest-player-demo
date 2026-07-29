@@ -3,6 +3,7 @@ import { ChevronUp, Trees } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDemo } from '../context/DemoContext';
 import { getStageConfig } from '../lib/demoLogic';
+import { assetUrl } from '../lib/assetUrl';
 import { AlbumTree } from './AlbumTree';
 import { MusicAtmosphere } from './MusicAtmosphere';
 import styles from './Album3DView.module.css';
@@ -220,7 +221,7 @@ export function Album3DView({ forestRevealed, revertToFlatVersion, resetToDefaul
             onMouseLeave={onMouseUp}
           >
             <div className={`${styles.cardFace} ${styles.frontFace} ${isPlaying ? styles.spinning : ''}`}>
-              <img data-testid="rotating-album-cover" src="/assets/covers/speak-now.jpg" alt="Taylor Swift《Speak Now》专辑封面" />
+              <img data-testid="rotating-album-cover" src={assetUrl('assets/covers/speak-now.jpg')} alt="Taylor Swift《Speak Now》专辑封面" />
             </div>
             <div className={styles.discEdge} />
             <div className={`${styles.cardFace} ${styles.backFace}`}>

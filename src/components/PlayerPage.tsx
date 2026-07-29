@@ -3,6 +3,7 @@ import { animate, motion, useMotionValue } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useDemo } from "../context/DemoContext";
 import { formatTime, getStageConfig } from "../lib/demoLogic";
+import { assetUrl } from "../lib/assetUrl";
 import { Album3DView } from "./Album3DView";
 import { NativePlayerPanel } from "./NativePlayerPanel";
 import { StageUpgradeModal } from "./StageUpgradeModal";
@@ -132,7 +133,7 @@ export function PlayerPage() {
           >
             <div className={`${styles.stylePage} ${styles.styleOnePage}`}>
               <motion.div className={styles.displayLayer} initial={{ opacity: 0, scale: 1.018 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.48, ease: "easeOut" }}>
-                <img className={styles.albumCover} src="/assets/covers/speak-now.jpg" alt="Taylor Swift《Speak Now》专辑封面" />
+                <img className={styles.albumCover} src={assetUrl('assets/covers/speak-now.jpg')} alt="Taylor Swift《Speak Now》专辑封面" />
               </motion.div>
             </div>
             <div className={styles.stylePage}>
