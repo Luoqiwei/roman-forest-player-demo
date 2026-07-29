@@ -1,0 +1,106 @@
+.panel { max-height: calc(100dvh - 32px); overflow: auto; }
+
+.section { margin-top: 14px; }
+.section label { display: block; margin-bottom: 7px; color: #a0718b; font-size: 10px; font-weight: 700; letter-spacing: .06em; }
+
+/* 树木风格切换 */
+.themeSwitch { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.themeSwitch button {
+  min-height: 38px;
+  border: 1px solid rgba(156, 121, 138, .18);
+  border-radius: 12px;
+  color: #74656c;
+  background: rgba(255, 255, 255, .55);
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all .18s ease;
+}
+.themeSwitch .active {
+  color: #fff;
+  border-color: rgba(255, 255, 255, .72);
+  background: linear-gradient(135deg, #ffb5bc, #f47da6);
+  box-shadow: 0 6px 16px rgba(224, 94, 139, .18);
+}
+
+/* 阶段网格 */
+.stageGrid { display: grid; gap: 5px; }
+.stageGrid button {
+  height: 36px;
+  border: 1px solid rgba(156, 121, 138, .18);
+  border-radius: 10px;
+  color: #74656c;
+  background: rgba(255, 255, 255, .55);
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all .18s ease;
+}
+.stageGrid .active {
+  color: #fff;
+  border-color: rgba(255, 255, 255, .72);
+  background: linear-gradient(135deg, #ffb5bc, #f47da6);
+  box-shadow: 0 6px 16px rgba(224, 94, 139, .18);
+}
+
+/* 快捷操作 */
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+  margin-top: 14px;
+}
+.actions button {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid rgba(156, 121, 138, .18);
+  border-radius: 12px;
+  color: #74656c;
+  background: rgba(255, 255, 255, .55);
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.actions .danger {
+  color: #b8536a;
+  border-color: rgba(184, 83, 106, .18);
+  background: rgba(184, 83, 106, .08);
+}
+
+/* 玩偶掉落 */
+.dolls {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+}
+.dolls button {
+  min-width: 0;
+  padding: 6px 2px;
+  border: 0;
+  border-radius: 10px;
+  color: #74656c;
+  background: rgba(255, 255, 255, .45);
+  cursor: pointer;
+}
+.dolls img { width: 40px; height: 40px; object-fit: contain; image-rendering: pixelated; }
+.dolls span { display: block; overflow: hidden; font-size: 7px; white-space: nowrap; text-overflow: ellipsis; margin-top: 2px; }
+
+/* 收起 */
+.collapse {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 14px;
+  padding: 8px 0 0;
+  border: 0;
+  border-top: 1px solid rgba(156, 121, 138, .1);
+  color: #ac8b96;
+  background: transparent;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}

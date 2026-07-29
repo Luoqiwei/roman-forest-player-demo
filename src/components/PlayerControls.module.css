@@ -1,0 +1,8 @@
+.controls { margin-top: 2px; }
+.timeline input { width: 100%; height: 3px; appearance: none; border-radius: 999px; outline: none; background: color-mix(in srgb, var(--player-control, #fff) 28%, transparent); accent-color: var(--player-control, #fff); }
+.timeline input::-webkit-slider-thumb { appearance: none; width: 10px; height: 10px; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(40, 35, 36, .25); }
+.timeline > div { display: flex; justify-content: space-between; margin-top: 7px; color: var(--player-text-secondary, rgba(255, 255, 255, .62)); font-size: 9px; }
+.actions { display: flex; align-items: center; justify-content: space-between; margin: 8px 2px 0; }
+.actions button { display: grid; place-items: center; width: 42px; height: 42px; border: 0; border-radius: 50%; color: var(--player-control, rgba(255, 255, 255, .94)); background: transparent; }
+.actions .play { width: 63px; height: 63px; color: var(--player-control, #fff); border: 1px solid var(--player-border, rgba(255, 255, 255, .12)); background: var(--player-surface, rgba(255, 255, 255, .12)); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12); }
+.fallback { margin: 2px 0 0; color: rgba(255, 235, 235, .82); font-size: 9px; text-align: center; }

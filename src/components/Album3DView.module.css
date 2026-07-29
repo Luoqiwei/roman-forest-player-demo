@@ -1,0 +1,284 @@
+.scene3D {
+  --album-surface-y: 84%;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  perspective: 900px;
+  perspective-origin: 50% 45%;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, .12) 0%,
+      transparent 48%,
+      rgba(244, 212, 221, .34) 78%,
+      #f4d4dd 100%
+    );
+}
+
+.visualCard {
+  position: absolute;
+  z-index: 2;
+  left: 18px;
+  right: 18px;
+  bottom: 14px;
+  width: auto;
+  max-width: 356px;
+  height: 270px;
+  margin: 0 auto;
+  border: 1px solid rgba(255, 255, 255, .7);
+  border-radius: 28px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, .38), rgba(255, 232, 240, .2)),
+    radial-gradient(circle at 78% 18%, rgba(255, 255, 255, .42), transparent 34%);
+  box-shadow:
+    0 0 28px rgba(108, 58, 79, .06),
+    inset 0 1px 0 rgba(255, 255, 255, .86);
+  backdrop-filter: blur(14px);
+  transform-origin: center bottom;
+  pointer-events: none;
+}
+
+/* 专辑包装层 */
+.albumWrapper {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+}
+
+/* 唱片中心与树根共用同一承载基线。 */
+.albumAnchor {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  transform: translateY(-50%);
+  transition: top .52s cubic-bezier(.2, .78, .24, 1);
+}
+
+.revealedAnchor {
+  top: var(--album-surface-y);
+}
+
+/* 3D 卡片 */
+.albumCard {
+  width: 82%;
+  max-width: 320px;
+  aspect-ratio: 1 / 1;
+  transform-style: preserve-3d;
+  will-change: transform;
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.settlingCard { pointer-events: none; }
+
+.revealedCard {
+  /* 允许翻回手势 */
+}
+
+
+/* 粉色玻璃厚度：3D 圆柱体边沿，仅在倾斜时可见 */
+.discEdge {
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 180, 200, .35) 0px 1px,
+      rgba(255, 200, 215, .15) 2px 3px
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 185, 205, .55) 0%,
+      rgba(255, 165, 185, .25) 25%,
+      rgba(255, 145, 170, .08) 50%,
+      rgba(255, 165, 185, .25) 75%,
+      rgba(255, 185, 205, .55) 100%
+    );
+  transform: translateZ(-6px);
+  z-index: -1;
+  pointer-events: none;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255, 190, 210, .45),
+    0 0 12px rgba(255, 170, 195, .2);
+}
+
+.revealedCard .cardFace {
+  box-shadow:
+    0 28px 52px rgba(63, 37, 48, .24),
+    0 8px 16px rgba(121, 70, 91, .18),
+    0 0 0 1px rgba(255, 255, 255, .58),
+    inset 0 0 22px rgba(255, 255, 255, .62);
+}
+
+.albumCard:active {
+  cursor: grabbing;
+}
+
+.cardFace {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow:
+    0 25px 58px rgba(38, 34, 36, .28),
+    0 0 0 1px rgba(255, 255, 255, .42),
+    inset 0 0 18px rgba(255, 255, 255, .52);
+}
+
+/* 正面：半透明唱片外圈 + 圆形专辑封面。 */
+.frontFace {
+  display: grid;
+  place-items: center;
+  animation: discSpin 14s linear infinite;
+  animation-play-state: paused;
+  background:
+    repeating-radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, .18) 0 1px,
+      rgba(210, 220, 227, .08) 2px 4px
+    ),
+    radial-gradient(
+      circle at 34% 28%,
+      rgba(255, 255, 255, .96) 0%,
+      rgba(239, 245, 249, .86) 42%,
+      rgba(205, 216, 224, .68) 100%
+    );
+}
+
+.frontFace.spinning {
+  animation-play-state: running;
+}
+
+@keyframes discSpin {
+  to { transform: rotateZ(360deg); }
+}
+
+.frontFace::before {
+  content: '';
+  position: absolute;
+  inset: 3.5%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: conic-gradient(
+    from 22deg,
+    rgba(255, 255, 255, .36),
+    rgba(188, 207, 222, .08) 18%,
+    rgba(255, 255, 255, .5) 34%,
+    rgba(196, 211, 220, .08) 56%,
+    rgba(255, 245, 213, .28) 72%,
+    rgba(255, 255, 255, .36)
+  );
+  -webkit-mask: radial-gradient(circle, transparent 0 31%, #000 32% 100%);
+  mask: radial-gradient(circle, transparent 0 31%, #000 32% 100%);
+}
+
+
+.frontFace img {
+  position: relative;
+  z-index: 1;
+  width: 58%;
+  height: 58%;
+  border: 5px solid rgba(205, 215, 222, .82);
+  border-radius: 50%;
+  object-fit: cover;
+  transition: filter .5s ease, opacity .5s ease;
+  box-shadow:
+    0 8px 22px rgba(54, 49, 51, .2),
+    0 0 0 2px rgba(255, 255, 255, .34);
+}
+.revealedCard .frontFace img {
+  filter: blur(6px) brightness(1.15);
+}
+
+.coverOverlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px 16px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, .55));
+  color: #fff;
+}
+
+.coverOverlay strong {
+  display: block;
+  font-size: 16px;
+  letter-spacing: .03em;
+}
+
+.coverOverlay span {
+  margin-top: 4px;
+  font-size: 11px;
+  opacity: .78;
+}
+
+/* 背面：森林辉光预览 */
+.backFace {
+  transform: rotateX(180deg);
+  background: radial-gradient(circle at center, #2d5a3a, #15201a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  color: rgba(142, 213, 152, .65);
+}
+
+.backContent svg {
+  opacity: .5;
+}
+
+.backContent span {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+/* 提示文字 */
+.hint {
+  position: absolute;
+  z-index: 8;
+  left: 0;
+  right: 0;
+  bottom: 18px;
+  width: max-content;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: rgba(93, 53, 69, .78);
+  pointer-events: none;
+}
+
+.hint span {
+  display: flex;
+  color: rgba(93, 53, 69, .68);
+}
+
+.hint small {
+  font-size: 10px;
+  letter-spacing: .06em;
+}
+
+@media (max-height: 720px) {
+  .albumCard { width: 72%; max-width: 270px; }
+  .hint { bottom: 10px; }
+}

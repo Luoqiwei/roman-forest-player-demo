@@ -1,0 +1,153 @@
+.panel {
+  --player-text: rgba(255, 255, 255, .96);
+  --player-text-secondary: rgba(255, 255, 255, .82);
+  --player-control: rgba(255, 255, 255, .92);
+  --player-border: rgba(255, 255, 255, .13);
+  --player-surface: rgba(255, 255, 255, .08);
+  position: relative;
+  z-index: 15;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  height: auto;
+  margin-top: 0;
+  overflow: hidden;
+  isolation: isolate;
+  padding: clamp(49px, 11dvh, 94px) 22px calc(15px + env(safe-area-inset-bottom));
+  color: var(--player-text);
+  /* 无独立背景色，半透明暗色叠加使底部模糊封面透出 */
+}
+
+.lightPanel {
+  --player-text: #5d3545;
+  --player-text-secondary: rgba(93, 53, 69, .74);
+  --player-control: rgba(93, 53, 69, .88);
+  --player-border: rgba(93, 53, 69, .18);
+  --player-surface: rgba(255, 255, 255, .3);
+  background: #f4d4dd;
+}
+.darkPanel { background: rgba(10, 8, 20, .9); }
+
+.panel::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  inset: 0;
+}
+
+.lightPanel::after {
+  background: linear-gradient(
+    180deg,
+    rgba(80, 74, 77, 0) 0%,
+    rgba(80, 74, 77, .04) 42%,
+    rgba(72, 67, 70, .1) 100%
+  );
+}
+
+.darkPanel::after {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, .3) 0%,
+    rgba(0, 0, 0, .48) 45%,
+    rgba(0, 0, 0, .6) 100%
+  );
+}
+
+.panel > * { position: relative; z-index: 1; }
+
+.songInfo h2 {
+  margin: 0 0 9px;
+  font-size: clamp(21px, 6vw, 26px);
+  line-height: 1.05;
+  letter-spacing: -.03em;
+}
+
+.artistLine {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  color: var(--player-text-secondary);
+  font-size: 13px;
+}
+
+.artistLine > span { flex: none; }
+
+.compactPanel .artistLine {
+  margin-top: 2px;
+  font-size: 12px;
+}
+
+.compactPanel .reactions {
+  margin-top: 12px;
+}
+
+.compactPanel .vipBanner {
+  visibility: hidden;
+}
+
+.featureTabs {
+  min-width: 0;
+  display: flex;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.featureTabs button {
+  flex: none;
+  height: 21px;
+  padding: 0 7px;
+  border: 1px solid var(--player-border);
+  border-radius: 4px;
+  color: var(--player-text-secondary);
+  background: var(--player-surface);
+  font-size: 10px;
+}
+
+.reactions {
+  height: 52px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  align-items: center;
+  margin: 6px -6px 3px;
+}
+
+.reactions button {
+  position: relative;
+  min-width: 0;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  color: var(--player-control);
+  background: transparent;
+}
+
+.reactions svg { width: 23px; height: 23px; stroke-width: 1.7; }
+.reactions small { position: absolute; left: 50%; bottom: 0; padding: 0 3px; border-radius: 3px; color: #fff; background: #a65575; font-size: 7px; font-weight: 900; transform: translateX(-15%); }
+.reactions em { position: absolute; top: 0; left: calc(50% + 8px); color: var(--player-text-secondary); font-size: 8px; font-style: normal; white-space: nowrap; }
+
+.vipBanner {
+  width: 100%;
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 8px;
+  padding: 0;
+  border: 0;
+  color: var(--player-text-secondary);
+  background: transparent;
+  font-size: 10px;
+}
+
+.vipBanner svg { color: #ffc645; filter: drop-shadow(0 1px 1px rgba(78, 56, 20, .45)); }
+.vipBanner strong { color: #ffd15a; font-weight: 700; }
+
+@media (max-height: 720px) {
+  .panel { padding-top: 44px; }
+  .reactions { height: 46px; }
+  .vipBanner { margin-top: 4px; }
+}
